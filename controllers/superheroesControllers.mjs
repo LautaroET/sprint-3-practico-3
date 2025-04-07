@@ -1,4 +1,4 @@
-import {obtenerTodosLosSuperHeroesService,crearSuperHeroeService,actualizarSuperHeroeService,eliminarSuperHeroeService ,eliminarSuperHeroePorNombreService} from '../services/superheroesService.mjs';
+import {obtenerTodosLosSuperHeroesService,crearSuperHeroeService,actualizarSuperHeroeService,eliminarSuperHeroeService ,eliminarSuperHeroePorNombreService,obtenerSuperHeroePorIdService} from '../services/superheroesService.mjs';
 import {renderizarListaSuperheroes,renderizarSuperheroe} from '../views/responseView.mjs';
 
 export async function dashboardController(req, res) {
@@ -27,6 +27,22 @@ export async function crearSuperHeroeController(req, res) {
             res.status(500).json({ mensaje: 'Error al crear el superhéroe', error: error.message });
         }
 }
+
+export async function mostrarFormularioEditarSuperheroe(req, res) {
+    try {
+        const { id } = req.params;
+        const hero = await obtenerSuperHeroePorIdService(id);
+
+        if (!hero) {
+            return res.status(404).send('Superhéroe no encontrado');
+        }
+
+        res.render('editSuperhero', { hero });
+    } catch (error) {
+        res.status(500).send('Error al cargar formulario de edición');
+    }
+}
+
 
 export async function actualizarSuperHeroeController(req, res) {
     try {

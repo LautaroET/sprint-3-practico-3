@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Editar Superhéroe</title>
+</head>
+<body>
+  <h1>Editar Superhéroe</h1>
+
+  <form id="editForm">
+    <label for="id">ID:</label>
+    <input type="text" name="id" value="<%= hero.id %>" readonly><br>
+
+    <label for="nombreSuperHeroe">Nombre Superhéroe:</label>
+    <input type="text" name="nombreSuperHeroe" value="<%= hero.nombreSuperHeroe %>" required><br>
+
+    <label for="nombreReal">Nombre Real:</label>
+    <input type="text" name="nombreReal" value="<%= hero.nombreReal %>" required><br>
+
+    <label for="edad">Edad:</label>
+    <input type="number" name="edad" value="<%= hero.edad %>" min="0" required><br>
+
+    <label for="planetaOrigen">Planeta Origen:</label>
+    <input type="text" name="planetaOrigen" value="<%= hero.planetaOrigen %>"><br>
+
+    <label for="debilidad">Debilidad:</label>
+    <input type="text" name="debilidad" value="<%= hero.debilidad %>"><br>
+
+    <label for="poderes">Poderes (separados por coma):</label>
+    <input type="text" name="poderes" value="<%= hero.poderes.join(', ') %>"><br>
+
+    <label for="aliados">Aliados (separados por coma):</label>
+    <input type="text" name="aliados" value="<%= hero.aliados.join(', ') %>"><br>
+
+    <label for="enemigos">Enemigos (separados por coma):</label>
+    <input type="text" name="enemigos" value="<%= hero.enemigos.join(', ') %>"><br>
+
+    <label for="creador">Creador:</label>
+    <input type="text" name="creador" value="<%= hero.creador %>"><br>
+
+    <button type="submit">Guardar Cambios</button>
+  </form>
+
+  <br>
+  <a href="/api/dashboard">Volver al Dashboard</a>
+
+  <script>
+    document.getElementById('editForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const form = e.target;
+      const id = form.id.value;
+
+      const formData = new FormData(form);
+      const data = {};
+
+      formData.forEach((value, key) => {
+        data[key] = value;
+      });
+
+      // Convertir poderes, aliados y enemigos en arrays
+      if (data.poderes) data.poderes = data.poderes.split(',').map(p => p.trim());
+      if (data.aliados) data.aliados = data.aliados.split(',').map(a => a.trim());
+      if (data.enemigos) data.enemigos = data.enemigos.split(',').map(e => e.trim());
+
+      try {
+        const response = await fetch(`/api/heroes/${id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          window.location.href = '/api/dashboard';
+        } else {
+          const error = await response.json();
+          alert('Error al actualizar: ' + error.mensaje);
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Error al conectar con el servidor');
+      }
+    });
+  </script>
+</body>
+</html>
+

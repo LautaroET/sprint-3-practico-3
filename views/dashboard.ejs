@@ -22,6 +22,11 @@
                     <td><%= hero.enemigos.join(", ") %></td>
                     <td><%= hero.creador %></td>
                     <td><%= hero.createAt %></td>
+                    <td>
+                        <a href="/api/heroes/<%= hero.id %>/editar">
+                          <button>Editar</button>
+                        </a>
+                      </td>
                 </tr>
             <% }) %>
         </tbody>

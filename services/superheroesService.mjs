@@ -5,6 +5,10 @@ const superHeroRepo = new SuperHeroRepository();
 export async function obtenerTodosLosSuperHeroesService() {
     return await superHeroRepo.obtenerTodos();
 }
+export async function obtenerSuperHeroePorIdService(id) {
+    return await superHeroRepo.obtenerPorId(id);
+}
+
 
 export async function crearSuperHeroeService(data) {
     return await superHeroRepo.crear(data);

@@ -5,7 +5,10 @@ class SuperHeroRepository extends IRepository {
     async obtenerTodos() {
         return await SuperHero.find();
     }
-
+    async obtenerPorId(id) {
+        return await SuperHero.findOne({ id });
+    }
+    
     async crear(data) {
         const nuevoHeroe = new SuperHero(data);
         return await nuevoHeroe.save();
