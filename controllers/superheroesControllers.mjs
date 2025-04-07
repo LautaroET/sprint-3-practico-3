@@ -10,13 +10,22 @@ export async function dashboardController(req, res) {
     }
 }
 
+export function mostrarFormularioNuevoSuperheroe(req, res) {
+    res.render('addSuperhero');
+}
+
 export async function crearSuperHeroeController(req, res) {
     try {
+        // Convertir strings a arrays
+        req.body.poderes = req.body.poderes.split(',').map(p => p.trim());
+        req.body.aliados = req.body.aliados?.split(',').map(a => a.trim()) || [];
+        req.body.enemigos = req.body.enemigos?.split(',').map(e => e.trim()) || [];
+    
         const nuevoHeroe = await crearSuperHeroeService(req.body);
-        res.status(201).json(renderizarSuperheroe(nuevoHeroe));
-    } catch (error) {
-        res.status(500).json({ mensaje: 'Error al crear el superhéroe', error: error.message });
-    }
+        res.redirect('/api/dashboard');
+        } catch (error) {
+            res.status(500).json({ mensaje: 'Error al crear el superhéroe', error: error.message });
+        }
 }
 
 export async function actualizarSuperHeroeController(req, res) {

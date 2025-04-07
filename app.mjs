@@ -4,6 +4,7 @@ import superHeroRoutes from './routes/superHeroRoutes.mjs'
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 connectDB();
 app.use('/api',superHeroRoutes);
 app.set('view engine','ejs');
