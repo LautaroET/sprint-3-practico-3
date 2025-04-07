@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+<body>
+    <table>
+        <%-include('partials/header.ejs')%>
+        <tbody>
+            <% superheroes.forEach(hero => { %>
+                <tr>
+                    <td><%= hero.id %></td>
+                    <td><%= hero.nombreSuperHeroe %></td>
+                    <td><%= hero.nombreReal %></td>
+                    <td><%= hero.edad %></td>
+                    <td><%= hero.planetaOrigen %></td>
+                    <td><%= hero.debilidad %></td>
+                    <td><%= hero.poderes.join(", ") %></td>
+                    <td><%= hero.aliados.join(", ") %></td>
+                    <td><%= hero.enemigos.join(", ") %></td>
+                    <td><%= hero.creador %></td>
+                    <td><%= hero.createAt %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>

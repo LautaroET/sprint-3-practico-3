@@ -1,12 +1,12 @@
 import express from 'express';
-import { obtenerTodosLosSuperHeroesController, crearSuperHeroeController ,actualizarSuperHeroeController ,eliminarSuperHeroeController,eliminarSuperHeroePorNombreController  } from '../controllers/superheroesControllers.mjs';
+import { crearSuperHeroeController ,actualizarSuperHeroeController ,eliminarSuperHeroeController,eliminarSuperHeroePorNombreController,dashboardController  } from '../controllers/superheroesControllers.mjs';
 import {nuevoSuperHeroeValidationRules} from '../validation/validationRule.mjs'
 import {handleValidationErrors} from '../validation/errorMiddlaware.mjs'
 
 const router = express.Router();
 
-//endpoin obtener todos los heroes de la base de datos
-router.get('/heroes', obtenerTodosLosSuperHeroesController);
+// Nueva ruta para el dashboard
+router.get('/dashboard', dashboardController);
 
 //endpoint crear nuevo super heroe
 router.post('/heroes', nuevoSuperHeroeValidationRules() ,handleValidationErrors,

@@ -1,10 +1,10 @@
 import {obtenerTodosLosSuperHeroesService,crearSuperHeroeService,actualizarSuperHeroeService,eliminarSuperHeroeService ,eliminarSuperHeroePorNombreService} from '../services/superheroesService.mjs';
 import {renderizarListaSuperheroes,renderizarSuperheroe} from '../views/responseView.mjs';
 
-export async function obtenerTodosLosSuperHeroesController(req, res) {
+export async function dashboardController(req, res) {
     try {
         const superheroes = await obtenerTodosLosSuperHeroesService();
-        res.json(renderizarListaSuperheroes(superheroes));
+        res.render('dashboard', { superheroes});
     } catch (error) {
         res.status(500).json({ mensaje: 'Error al obtener los superhéroes', error: error.message });
     }
