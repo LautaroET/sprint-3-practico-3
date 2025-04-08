@@ -3,46 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <title>Editar Superhéroe</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body>
-  <h1>Editar Superhéroe</h1>
+<body class="bg-gray-300">
+  <h1 class="text-4xl text-center py-4">Editar Superhéroe</h1>
 
-  <form id="editForm">
-    <label for="id">ID:</label>
-    <input type="text" name="id" value="<%= hero.id %>" readonly><br>
+  <form class="block w-150 mx-auto p-6 border border rounded-md shadow-md" id="editForm" >
+    <label class="p-4" for="id">ID:</label>
+    <input class="border" type="text" name="id" value="<%= hero.id %>" readonly><br><br>
 
-    <label for="nombreSuperHeroe">Nombre Superhéroe:</label>
-    <input type="text" name="nombreSuperHeroe" value="<%= hero.nombreSuperHeroe %>" required><br>
+    <label class="p-4" for="nombreSuperHeroe">Nombre Superhéroe:</label>
+    <input class="border" type="text" name="nombreSuperHeroe" value="<%= hero.nombreSuperHeroe %>" required><br><br>
 
-    <label for="nombreReal">Nombre Real:</label>
-    <input type="text" name="nombreReal" value="<%= hero.nombreReal %>" required><br>
+    <label class="p-4" for="nombreReal">Nombre Real:</label>
+    <input class="border" type="text" name="nombreReal" value="<%= hero.nombreReal %>" required><br><br>
 
-    <label for="edad">Edad:</label>
-    <input type="number" name="edad" value="<%= hero.edad %>" min="0" required><br>
+    <label class="p-4" for="edad">Edad:</label>
+    <input class="border" type="number" name="edad" value="<%= hero.edad %>" min="0" required><br><br>
 
-    <label for="planetaOrigen">Planeta Origen:</label>
-    <input type="text" name="planetaOrigen" value="<%= hero.planetaOrigen %>"><br>
+    <label class="p-4" for="planetaOrigen">Planeta Origen:</label>
+    <input class="border" type="text" name="planetaOrigen" value="<%= hero.planetaOrigen %>"><br><br>
 
-    <label for="debilidad">Debilidad:</label>
-    <input type="text" name="debilidad" value="<%= hero.debilidad %>"><br>
+    <label class="p-4" for="debilidad">Debilidad:</label>
+    <input class="border" type="text" name="debilidad" value="<%= hero.debilidad %>"><br><br>
 
-    <label for="poderes">Poderes (separados por coma):</label>
-    <input type="text" name="poderes" value="<%= hero.poderes.join(', ') %>"><br>
+    <label class="p-4" for="poderes">Poderes (separados por coma):</label>
+    <input class="border" type="text" name="poderes" value="<%= hero.poderes.join(', ') %>"><br><br>
 
-    <label for="aliados">Aliados (separados por coma):</label>
-    <input type="text" name="aliados" value="<%= hero.aliados.join(', ') %>"><br>
+    <label class="p-4" for="aliados">Aliados (separados por coma):</label>
+    <input class="border" type="text" name="aliados" value="<%= hero.aliados.join(', ') %>"><br><br>
 
-    <label for="enemigos">Enemigos (separados por coma):</label>
-    <input type="text" name="enemigos" value="<%= hero.enemigos.join(', ') %>"><br>
+    <label class="p-4" for="enemigos">Enemigos (separados por coma):</label>
+    <input class="border" type="text" name="enemigos" value="<%= hero.enemigos.join(', ') %>"><br><br>
 
-    <label for="creador">Creador:</label>
-    <input type="text" name="creador" value="<%= hero.creador %>"><br>
+    <label class="p-4" for="creador">Creador:</label>
+    <input class="border" type="text" name="creador" value="<%= hero.creador %>"><br><br>
 
-    <button type="submit">Guardar Cambios</button>
+    <button class=" cursor-pointer text-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">Guardar Cambios</button>
   </form>
-
   <br>
-  <a href="/api/dashboard">Volver al Dashboard</a>
+  <div class=" cursor-pointer text-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+    <a href="/api/dashboard">Volver al Dashboard</a>
+  </div>
 
   <script>
     document.getElementById('editForm').addEventListener('submit', async function (e) {
