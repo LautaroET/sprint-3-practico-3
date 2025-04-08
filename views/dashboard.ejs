@@ -22,11 +22,8 @@
                     <td><%= hero.enemigos.join(", ") %></td>
                     <td><%= hero.creador %></td>
                     <td><%= hero.createAt %></td>
-                    <td>
-                        <a href="/api/heroes/<%= hero.id %>/editar">
-                          <button>Editar</button>
-                        </a>
-                      </td>
+                    <td><a href="/api/heroes/<%= hero.id %>/editar"><button>Editar</button></a></td>
+                    <td><button onclick="eliminarHeroe('<%= hero.id %>')">Eliminar</button></td>
                 </tr>
             <% }) %>
         </tbody>
@@ -34,5 +31,27 @@
     <a href="/api/heroes/nuevo">
         <button>Nuevo Superhéroe</button>
     </a>
+    <script>
+        async function eliminarHeroe(id) {
+            const confirmado = confirm("¿Estás seguro de que quieres eliminar este superhéroe?");
+            if (!confirmado) return;
+            try {
+            const respuesta = await fetch(`/api/heroes/${id}`, {
+            method: 'DELETE'
+            });
+            if (respuesta.ok) {
+                alert("Superhéroe eliminado con éxito.");
+              location.reload(); // recarga la página para actualizar la lista
+            } else {
+                const data = await respuesta.json();
+                alert("Error al eliminar: " + data.mensaje);
+            }
+            } catch (error) {
+                alert("Error al conectar con el servidor.");
+                console.error(error);
+            }
+        }
+    </script>
+    
 </body>
 </html>
